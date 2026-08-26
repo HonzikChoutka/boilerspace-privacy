@@ -1,4 +1,4 @@
-# BoilerSpace — privacy policy
+# BoilerSpace Privacy Policy
 
 This repository exists for one reason: to host the privacy policy for the
 [BoilerSpace](https://chromewebstore.google.com/) Chrome extension at a public,
