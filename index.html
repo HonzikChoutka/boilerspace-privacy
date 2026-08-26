@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BoilerSpace &mdash; Privacy Policy</title>
+<meta name="description" content="BoilerSpace collects nothing, transmits nothing, and has no server. What it reads, what it keeps, and why.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff; --panel: #fbfaf8; --rule: #e4e1da;
+    --ink: #1a1a1b; --ink-2: #565454; --ink-3: #8a8681; --accent: #8c6f3e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101011; --panel: #161618; --rule: #2a2a2e;
+      --ink: #ecebe8; --ink-2: #a5a29c; --ink-3: #78756f; --accent: #cfb991;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 48px 24px 96px;
+    background: var(--bg); color: var(--ink);
+    font: 16px/1.6 "Lato", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  main { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 30px; line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 4px; }
+  h2 { font-size: 20px; margin: 40px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  h3 { font-size: 16px; margin: 28px 0 8px; color: var(--ink-2); }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent); }
+  ul { margin: 0 0 14px; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 36px 0; }
+  code {
+    font: 13px ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--panel); border: 1px solid var(--rule);
+    border-radius: 4px; padding: 1px 5px;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 14px; display: block; overflow-x: auto; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3); }
+  em { color: var(--ink-3); font-style: normal; font-size: 14px; }
+  strong { font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+<h1>BoilerSpace — Privacy Policy</h1>
+<p><em>Last updated: 26 August 2026 · applies to version 2.0.0 and later</em></p>
+<p><strong>BoilerSpace does not collect, transmit, or sell any data. There is no server, no analytics, and no third party. Everything the extension reads stays in your own browser.</strong></p>
+<p>That is the whole policy. The rest of this document explains precisely what it reads, what it keeps, and why — because &quot;we don&#x27;t collect anything&quot; is easy to write and worth being specific about.</p>
+<hr>
+<h2>What BoilerSpace reads</h2>
+<p>BoilerSpace runs only on Brightspace pages: <code>*.brightspace.com</code>, plus any additional site you explicitly grant it from the extension&#x27;s popup (see <a href="#permissions">Permissions</a>).</p>
+<p>On those pages it reads:</p>
+<ul><li><strong>The page itself</strong> — to restyle it. Course names, grades, assignment titles and due dates pass through the extension&#x27;s code so it can lay them out, colour them, and group them. None of this leaves the page.</li><li><strong>Brightspace&#x27;s own API</strong>, using the session you are already signed in with:</li></ul>
+<table>
+<tr><th>Endpoint</th><th>Used for</th></tr>
+<tr><td><code>/d2l/api/lp/1.25/enrollments/myenrollments/</code></td><td>the list of your courses</td></tr>
+<tr><td><code>/d2l/api/le/1.25/calendar/events/myEvents/</code></td><td>upcoming deadlines</td></tr>
+<tr><td><code>/d2l/api/le/1.25/{course}/content/root/</code></td><td>locating an assignment&#x27;s module</td></tr>
+<tr><td><code>/d2l/api/le/1.25/{course}/content/topics/{id}</code></td><td>confirming that match</td></tr>
+<tr><td><code>/d2l/api/le/1.25/{course}/dropbox/folders/{id}/submissions/</code></td><td>whether you have submitted</td></tr>
+</table>
+<p>These are the same requests Brightspace makes for you. They go to <strong>your institution&#x27;s Brightspace server and nowhere else.</strong></p>
+<p>BoilerSpace makes <strong>no requests to any other host</strong>. It loads no remote scripts, fonts, or images.</p>
+<h2>What BoilerSpace stores</h2>
+<p>All of it is local to your browser.</p>
+<p><strong>In extension storage (<code>chrome.storage.local</code>):</strong></p>
+<table>
+<tr><th>Key</th><th>Contents</th></tr>
+<tr><td><code>settings</code></td><td>your seven toggle choices</td></tr>
+<tr><td><code>cachedDeadlines</code></td><td>upcoming deadlines (title, due date, course), refreshed every 15 minutes</td></tr>
+<tr><td><code>bbSubmissions</code></td><td>whether each assignment has a submission, for 10 minutes</td></tr>
+<tr><td><code>bbModuleLinks</code></td><td>which content module an assignment belongs to</td></tr>
+</table>
+<p><strong>In the page&#x27;s own storage:</strong> a cached copy of your course list, so the dashboard does not re-fetch it on every load.</p>
+<p>Uninstalling the extension removes everything in extension storage. The page cache is cleared with your normal browsing data for that site.</p>
+<h3>About the session fingerprint</h3>
+<p>Two people who use the same browser profile must not be shown each other&#x27;s cached course list. To prevent that, BoilerSpace takes the session identifier Brightspace already puts on the page, runs it through a short non-reversible hash, and uses the result purely as a name for the cache.</p>
+<p>The identifier itself is <strong>never stored and never transmitted</strong>. The hash is 32 bits — far too small to reconstruct anything from, which is exactly what is wanted here: it needs to distinguish two sessions, not identify one.</p>
+<h2>What BoilerSpace never does</h2>
+<ul><li>No data is sent to the developer or to any third party.</li><li>No analytics, telemetry, crash reporting, or usage tracking.</li><li>No advertising, and no sale or transfer of data to anyone.</li><li>Nothing is read on any site other than the Brightspace pages listed above.</li><li>No credentials are read, stored, or handled. BoilerSpace uses the session you already have; it never sees a password.</li><li>Your data is not used to train anything.</li></ul>
+<h2>Permissions</h2>
+<table>
+<tr><th>Permission</th><th>Why it is needed</th></tr>
+<tr><td><code>storage</code></td><td>to remember your toggle settings and the caches above</td></tr>
+<tr><td><code>activeTab</code></td><td>so the popup can tell whether the tab you are looking at is a Brightspace page that needs to be enabled</td></tr>
+<tr><td><code>scripting</code></td><td>to start running on a self-hosted institution once you grant it</td></tr>
+<tr><td><code>declarativeNetRequest</code></td><td>to open course PDFs in a tab instead of downloading them, by adjusting a response header on PDF files served under <code>/d2l/</code></td></tr>
+<tr><td><code>*://*.brightspace.com/*</code></td><td>the domain D2L hosts most institutions on</td></tr>
+<tr><td><code>*://*/d2l/*</code> (optional)</td><td><strong>not granted at install.</strong> Many universities run Brightspace on their own domain. If you use one, the popup offers to enable BoilerSpace for that single site, and it only ever applies to sites you have approved.</td></tr>
+</table>
+<h2>Children</h2>
+<p>BoilerSpace is a utility for students using their own institution&#x27;s learning platform. It collects nothing from anyone, of any age.</p>
+<h2>Changes</h2>
+<p>Material changes to this policy will be published here alongside a version bump. Because the extension has no server, a change in what it does can only reach you through an extension update, which Chrome shows you.</p>
+<h2>Contact</h2>
+<p>Questions or concerns: open an issue at <a href="https://github.com/HonzikChoutka/boilerspace-privacy/issues">https://github.com/HonzikChoutka/boilerspace-privacy/issues</a>.</p>
+<p>BoilerSpace&#x27;s source is not public. This policy describes what the published extension does; the package on the Chrome Web Store is the authoritative artefact, and Chrome shows you any update before it installs.</p>
+<hr>
+<p>BoilerSpace is an independent project. It is not affiliated with, endorsed by, or sponsored by D2L Corporation or Purdue University. &quot;Brightspace&quot; and &quot;D2L&quot; are trademarks of D2L Corporation; &quot;Purdue&quot; and &quot;Boilermakers&quot; are trademarks of Purdue University. They are used here only to describe what this extension works with.</p>
+</main>
+</body>
+</html>
