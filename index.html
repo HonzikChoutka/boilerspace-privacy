@@ -47,7 +47,7 @@
 <body>
 <main>
 <h1>BoilerSpace — Privacy Policy</h1>
-<p><em>Last updated: 26 August 2026 · applies to version 2.0.0 and later</em></p>
+<p><em>Last updated: 28 August 2026 · applies to version 2.1.0 and later</em></p>
 <p><strong>BoilerSpace does not collect, transmit, or sell any data. There is no server, no analytics, and no third party. Everything the extension reads stays in your own browser.</strong></p>
 <p>That is the whole policy. The rest of this document explains precisely what it reads, what it keeps, and why — because &quot;we don&#x27;t collect anything&quot; is easy to write and worth being specific about.</p>
 <hr>
@@ -60,11 +60,14 @@
 <tr><td><code>/d2l/api/lp/1.25/enrollments/myenrollments/</code></td><td>the list of your courses</td></tr>
 <tr><td><code>/d2l/api/le/1.25/calendar/events/myEvents/</code></td><td>upcoming deadlines</td></tr>
 <tr><td><code>/d2l/api/le/1.25/{course}/content/root/</code></td><td>locating an assignment&#x27;s module</td></tr>
+<tr><td><code>/d2l/api/le/1.25/{course}/content/modules/{id}/structure/</code></td><td>which items in a module can be opened in place</td></tr>
 <tr><td><code>/d2l/api/le/1.25/{course}/content/topics/{id}</code></td><td>confirming that match</td></tr>
 <tr><td><code>/d2l/api/le/1.25/{course}/dropbox/folders/{id}/submissions/</code></td><td>whether you have submitted</td></tr>
 </table>
 <p>These are the same requests Brightspace makes for you. They go to <strong>your institution&#x27;s Brightspace server and nowhere else.</strong></p>
 <p>BoilerSpace makes <strong>no requests to any other host</strong>. It loads no remote scripts, fonts, or images.</p>
+<h3>Opening an item in place</h3>
+<p>Expanding an item on a content page loads <strong>that item&#x27;s own Brightspace page</strong> inside a frame on the page you are already on, at the same address your browser would go to if you clicked it. Nothing is copied, proxied, or sent anywhere: it is the same request to the same server, made in the same session. The extension reads that frame only to hide the parts that repeat the row above it — the navigation, the duplicated title — and closing the item removes the frame.</p>
 <h2>What BoilerSpace stores</h2>
 <p>All of it is local to your browser.</p>
 <p><strong>In extension storage (<code>chrome.storage.local</code>):</strong></p>
