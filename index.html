@@ -63,8 +63,12 @@
 <tr><td><code>/d2l/api/le/1.25/{course}/content/modules/{id}/structure/</code></td><td>which items in a module can be opened in place</td></tr>
 <tr><td><code>/d2l/api/le/1.25/{course}/content/topics/{id}</code></td><td>confirming that match</td></tr>
 <tr><td><code>/d2l/api/le/1.25/{course}/dropbox/folders/{id}/submissions/</code></td><td>whether you have submitted</td></tr>
+<tr><td><code>/d2l/api/le/1.25/{course}/dropbox/folders/</code></td><td>the due date set on each assignment</td></tr>
+<tr><td><code>/d2l/api/le/1.67/{course}/quizzes/</code></td><td>the due date set on each quiz</td></tr>
+<tr><td><code>/d2l/lms/quizzing/user/quizzes_list.d2l</code></td><td>how many quiz attempts you have used</td></tr>
 </table>
 <p>These are the same requests Brightspace makes for you. They go to <strong>your institution&#x27;s Brightspace server and nowhere else.</strong></p>
+<p>The last of those is a page rather than an API call. Brightspace does not let a student read their own quiz attempts through its API — it answers &quot;not authorized&quot; — so the count is read from the quiz list page that Brightspace already shows you. It is requested in the background, read for the attempt numbers, and discarded; nothing from it is stored.</p>
 <p>BoilerSpace makes <strong>no requests to any other host</strong>. It loads no remote scripts, fonts, or images.</p>
 <h3>Opening an item in place</h3>
 <p>Expanding an item on a content page loads <strong>that item&#x27;s own Brightspace page</strong> inside a frame on the page you are already on, at the same address your browser would go to if you clicked it. Nothing is copied, proxied, or sent anywhere: it is the same request to the same server, made in the same session. The extension reads that frame only to hide the parts that repeat the row above it — the navigation, the duplicated title — and closing the item removes the frame.</p>
@@ -77,6 +81,7 @@
 <tr><td><code>cachedDeadlines</code></td><td>upcoming deadlines (title, due date, course), refreshed every 15 minutes</td></tr>
 <tr><td><code>bbSubmissions</code></td><td>whether each assignment has a submission, for 10 minutes</td></tr>
 <tr><td><code>bbModuleLinks</code></td><td>which content module an assignment belongs to</td></tr>
+<tr><td><code>bbHiddenDeadlines</code></td><td>overdue items you have chosen to hide from the panel</td></tr>
 </table>
 <p><strong>In the page&#x27;s own storage:</strong> a cached copy of your course list, so the dashboard does not re-fetch it on every load.</p>
 <p>Uninstalling the extension removes everything in extension storage. The page cache is cleared with your normal browsing data for that site.</p>
